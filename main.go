@@ -669,7 +669,7 @@ func main() {
 		}
 	}
 
-	listen := fmt.Sprintf(":%d", *port)
+	listen := fmt.Sprintf("0.0.0.0:%d", *port)
 	logger.Logf("listening on %s", listen)
 	err := http.ListenAndServe(listen, nil)
 	if err != nil {
