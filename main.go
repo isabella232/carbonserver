@@ -489,7 +489,7 @@ func fetchHandler(wr http.ResponseWriter, req *http.Request) {
 		return
 	}
 	wr.Write(b)
-	logger.Debugf("fetch: %d series for %s in %v", len(multi.Metrics), req.FormValue("query"), time.Since(t0))
+	logger.Debugf("fetch: %d series for %s in %v", len(multi.GetMetrics()), req.FormValue("target"), time.Since(t0))
 	return
 }
 
