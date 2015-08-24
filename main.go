@@ -328,7 +328,7 @@ func findHandler(wr http.ResponseWriter, req *http.Request) {
 
 func fetchHandler(wr http.ResponseWriter, req *http.Request) {
 	// URL: /render/?target=the.metric.name&format=pickle&from=1396008021&until=1396022421
-
+  t0 := time.Now()
 	Metrics.RenderRequests.Add(1)
 	req.ParseForm()
 	metric := req.FormValue("target")
@@ -489,8 +489,7 @@ func fetchHandler(wr http.ResponseWriter, req *http.Request) {
 		return
 	}
 	wr.Write(b)
-
-	//logger.Debugf("served %d points for %s", len(values), metric)
+	logger.Debugf("fetch: %d series for %s in %v", len(multi.Metrics), req.FormValue("query"), time.Since(t0))
 	return
 }
 
