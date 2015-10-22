@@ -397,6 +397,9 @@ func fetchHandler(wr http.ResponseWriter, req *http.Request) {
 		}
 
 		points, err := w.Fetch(fromTime, untilTime)
+
+		w.Close()
+
 		if err != nil {
 			Metrics.RenderErrors.Add(1)
 			logger.Logf("failed to fetch points from %s: %s", path, err)
