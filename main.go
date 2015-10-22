@@ -574,6 +574,8 @@ func main() {
 	logdir := flag.String("logdir", "/var/log/carbonserver/", "logging directory")
 	logtostdout := flag.Bool("stdout", false, "log also to stdout")
 	scanFrequency := flag.Duration("scanfreq", 0, "file index scan frequency (0 to disable file index)")
+	logDuration := flag.Duration("logDuration", 1 * time.Hour, "How long to keep a log file")
+	logMax := flag.Duration("logMagAge", 2 * time.Hour, "How long to keep rotated logs")
 
 	flag.Parse()
 
@@ -583,6 +585,9 @@ func main() {
 
 	// Optional fields must be set afterwards
 	rl.LinkName = *logdir + "/carbonserver.log"
+	rl.RotationTime = *logDuration
+	rl.MaxAge = *logMax
+
 
 	if *logtostdout {
 		log.SetOutput(io.MultiWriter(os.Stdout, rl))
