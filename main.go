@@ -575,7 +575,7 @@ func main() {
 	logtostdout := flag.Bool("stdout", false, "log also to stdout")
 	scanFrequency := flag.Duration("scanfreq", 0, "file index scan frequency (0 to disable file index)")
 	logDuration := flag.Duration("logDuration", 1 * time.Hour, "How long to keep a log file")
-	logMax := flag.Duration("logMagAge", 2 * time.Hour, "How long to keep rotated logs")
+	logMax := flag.Duration("logMaxAge", 2 * time.Hour, "How long to keep rotated logs")
 
 	flag.Parse()
 
