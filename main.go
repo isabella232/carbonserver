@@ -519,6 +519,7 @@ func infoHandler(wr http.ResponseWriter, req *http.Request) {
 
 	path := config.WhisperData + "/" + strings.Replace(metric, ".", "/", -1) + ".wsp"
 	w, err := whisper.Open(path)
+	defer w.Close()
 	if err != nil {
 		Metrics.NotFound.Add(1)
 		logger.Debugf("failed to %s", err)
