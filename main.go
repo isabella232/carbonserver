@@ -573,7 +573,7 @@ func main() {
 	maxglobs := flag.Int("maxexpand", config.MaxGlobs, "maximum expansion depth to perform on input via curly braces ({a,b,c})")
 	maxprocs := flag.Int("maxprocs", runtime.NumCPU()*80/100, "GOMAXPROCS")
 	logdir := flag.String("logdir", "/var/log/carbonserver/", "logging directory")
-	logtostdout := flag.Bool("stdout", false, "log also to stdout")
+	logtostdout := flag.Bool("stdout", false, "log to stdout only")
 	scanFrequency := flag.Duration("scanfreq", 0, "file index scan frequency (0 to disable file index)")
 
 	flag.Parse()
@@ -586,7 +586,7 @@ func main() {
 	rl.LinkName = *logdir + "/carbonserver.log"
 
 	if *logtostdout {
-		log.SetOutput(io.MultiWriter(os.Stdout, rl))
+		log.SetOutput(os.Stdout)
 	} else {
 		log.SetOutput(rl)
 	}
