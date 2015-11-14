@@ -6,7 +6,6 @@ import (
 	"expvar"
 	"flag"
 	"fmt"
-	"io"
 	"log"
 	"math"
 	"net/http"
