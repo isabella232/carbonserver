@@ -381,7 +381,7 @@ func fetchHandler(wr http.ResponseWriter, req *http.Request) {
 	for i, metric := range files {
 
 		if !leafs[i] {
-			log.Printf("skipping directory = %q\n", metric)
+			logger.Debugf("skipping directory = %q\n", metric)
 			// can't fetch a directory
 			continue
 		}
