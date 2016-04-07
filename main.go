@@ -380,7 +380,7 @@ func fetchHandler(wr http.ResponseWriter, req *http.Request) {
 	for i, metric := range files {
 
 		if !leafs[i] {
-			log.Printf("skipping directory = %q\n", metric)
+			logger.Debugf("skipping directory = %q\n", metric)
 			// can't fetch a directory
 			continue
 		}
@@ -650,10 +650,7 @@ func main() {
 		logger.Logf("Using graphite host %v", config.GraphiteHost)
 
 		// register our metrics with graphite
-		graphite, err := g2g.NewGraphite(config.GraphiteHost, 60*time.Second, 10*time.Second)
-		if err != nil {
-			log.Fatalf("unable to connect to to graphite: %v: %v", config.GraphiteHost, err)
-		}
+		graphite := g2g.NewGraphite(config.GraphiteHost, 60*time.Second, 10*time.Second)
 
 		hostname, _ := os.Hostname()
 		hostname = strings.Replace(hostname, ".", "_", -1)
